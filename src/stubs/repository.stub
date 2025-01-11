@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Modules\{{moduleName}}\Repositories;
+
+use App\Modules\{{moduleName}}\Models\{{modelName}};
+
+class {{modelName}}Repository
+{
+    public function paginate($perPage = 15)
+    {
+        return {{modelName}}::paginate($perPage);
+    }
+}

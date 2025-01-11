@@ -1,0 +1,25 @@
+{
+    "name": "kareem22t/structure-my-module",
+    "description": "Laravel package for generating structured modules",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Kareem22t\\StructureMyModule\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0",
+        "illuminate/console": "^11.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kareem22t\\StructureMyModule\\StructureMyModuleServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

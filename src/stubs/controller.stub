@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Modules\{{moduleName}}\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Modules\{{moduleName}}\Services\{{modelName}}Service;
+
+class {{modelName}}Controller extends Controller
+{
+    protected $service;
+
+    public function __construct({{modelName}}Service $service)
+    {
+        $this->service = $service;
+    }
+
+    public function index()
+    {
+        $items = $this->service->paginate();
+        return view('{{moduleName}}::index', compact('items'));
+    }
+}

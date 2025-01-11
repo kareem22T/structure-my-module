@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Modules\{{moduleName}}\Services;
+
+use App\Modules\{{moduleName}}\Repositories\{{modelName}}Repository;
+
+class {{modelName}}Service
+{
+    protected $repository;
+
+    public function __construct({{modelName}}Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function paginate($perPage = 15)
+    {
+        return $this->repository->paginate($perPage);
+    }
+}
