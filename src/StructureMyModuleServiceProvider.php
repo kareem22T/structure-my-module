@@ -3,7 +3,7 @@
 namespace Kareem22t\StructureMyModule;
 
 use Illuminate\Support\ServiceProvider;
-use Kareem22t\StructureMyModule\Commands\MakeStructureCommand;
+use Kareem22t\StructureMyModule\Commands\TestCommand;
 
 class StructureMyModuleServiceProvider extends ServiceProvider
 {
@@ -11,17 +11,8 @@ class StructureMyModuleServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                MakeStructureCommand::class,
+                TestCommand::class
             ]);
-
-            $this->publishes([
-                __DIR__ . '/stubs' => base_path('stubs/vendor/structure-my-module'),
-            ], 'structure-my-module-stubs');
         }
-    }
-
-    public function register()
-    {
-        //
     }
 }

@@ -1,7 +1,0 @@
-<?php
-
-use App\Modules\{{moduleName}}\Controllers\{{modelName}}Controller;
-
-Route::group(['prefix' => '{{moduleName}}', 'as' => '{{moduleName}}.'], function () {
-    Route::get('/', [{{modelName}}Controller::class, 'index'])->name('index');
-});

@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Test;
+
+class {{name}}
+{
+    public function test()
+    {
+        return "This is {{name}} test file";
+    }
+}
