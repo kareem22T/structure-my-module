@@ -129,15 +129,7 @@ class {{name}}Controller extends Controller
 
     public function destroy($id)
     {
-        try {
-            if (!$result) {
-                return ApiResponse::error(
-                    '{{name}} not found',
-                    ['id' => 'Record not found'],
-                    404
-                );
-            }
-            
+        try {            
             $result = $this->service->delete{{name}}($id);
 
             return ApiResponse::success(
