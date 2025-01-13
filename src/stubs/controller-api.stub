@@ -130,8 +130,6 @@ class {{name}}Controller extends Controller
     public function destroy($id)
     {
         try {
-            $result = $this->service->delete{{name}}($id);
-            
             if (!$result) {
                 return ApiResponse::error(
                     '{{name}} not found',
@@ -139,6 +137,8 @@ class {{name}}Controller extends Controller
                     404
                 );
             }
+            
+            $result = $this->service->delete{{name}}($id);
 
             return ApiResponse::success(
                 null,

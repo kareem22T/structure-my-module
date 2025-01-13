@@ -3,6 +3,7 @@
 namespace App\Repositories{{prefix}};
 
 use App\Models\{{name}};
+use App\Repositories{{prefix}}\{{name}}RepositoryInterface;
 
 class {{name}}Repository implements {{name}}RepositoryInterface
 {

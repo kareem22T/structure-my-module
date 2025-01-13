@@ -98,11 +98,11 @@ class {{name}}Controller extends Controller
     public function destroy($id)
     {
         try {
-            $result = $this->service->delete{{name}}($id);
-
             if (!$result) {
                 return redirect()->route('{{name}}.index')->withErrors('{{name}} not found');
             }
+
+            $result = $this->service->delete{{name}}($id);
 
             return redirect()->route('{{name}}.index')->with('success', '{{name}} deleted successfully');
         } catch (\Exception $e) {

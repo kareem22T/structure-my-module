@@ -65,7 +65,7 @@ class CreateModule extends Command
             [
                 'name' => 'Repository Interface',
                 'stub' => __DIR__ . '/../stubs/repository-interface.stub',
-                'target' => app_path("Repositories/{$name}RepositoryInterface.php"),
+                'target' => app_path("Repositories/{{prefix}}{$name}RepositoryInterface.php"),
             ],
             [
                 'name' => 'Repository Implementation',
