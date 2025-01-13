@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Kareem22t\StructureMyModule\ApiResponse;
 use App\Http\Resources\{{name}}Resource;
 use App\Http\Resources\{{name}}Collection;
 use App\Services\{{name}}Service;
 use App\Http\Requests\{{name}}Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 
 class {{name}}Controller extends Controller
 {
@@ -18,33 +21,136 @@ class {{name}}Controller extends Controller
 
     public function index()
     {
-        $entities = $this->service->getAll{{names}}();
-        return new {{name}}Collection($entities);
+        try {
+            $entities = $this->service->getAll{{names}}();
+            return ApiResponse::success(
+                new {{name}}Collection($entities),
+                '{{name}} list retrieved successfully'
+            );
+        } catch (\Exception $e) {
+            return ApiResponse::error(
+                'Error retrieving {{name}} list',
+                ['error' => $e->getMessage()]
+            );
+        }
     }
 
     public function show($id)
     {
-        $entity = $this->service->get{{name}}ById($id);
-        return new {{name}}Resource($entity);
+        try {
+            $entity = $this->service->get{{name}}ById($id);
+            
+            if (!$entity) {
+                return ApiResponse::error(
+                    '{{name}} not found',
+                    ['id' => 'Record not found'],
+                    404
+                );
+            }
+
+            return ApiResponse::success(
+                new {{name}}Resource($entity),
+                '{{name}} retrieved successfully'
+            );
+        } catch (\Exception $e) {
+            return ApiResponse::error(
+                'Error retrieving {{name}}',
+                ['error' => $e->getMessage()]
+            );
+        }
     }
 
     public function store({{name}}Request $request)
     {
-        $data = $request->validated();
-        $entity = $this->service->create{{name}}($data);
-        return new {{name}}Resource($entity);
+        try {
+            $data = $request->validated();
+            $entity = $this->service->create{{name}}($data);
+            
+            return ApiResponse::success(
+                new {{name}}Resource($entity),
+                '{{name}} created successfully',
+                201
+            );
+        } catch (ValidationException $e) {
+            return ApiResponse::error(
+                'Validation error',
+                $e->errors(),
+                422
+            );
+        } catch (\Exception $e) {
+            Log::error('Error creating {{name}}', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return ApiResponse::error(
+                'Error creating {{name}}',
+                ['error' => $e->getMessage()]
+            );
+        }
     }
 
     public function update({{name}}Request $request, $id)
     {
-        $data = $request->validated();
-        $entity = $this->service->update{{name}}($id, $data);
-        return new {{name}}Resource($entity);
+        try {
+            $data = $request->validated();
+            $entity = $this->service->update{{name}}($id, $data);
+            
+            if (!$entity) {
+                return ApiResponse::error(
+                    '{{name}} not found',
+                    ['id' => 'Record not found'],
+                    404
+                );
+            }
+
+            return ApiResponse::success(
+                new {{name}}Resource($entity),
+                '{{name}} updated successfully'
+            );
+        } catch (ValidationException $e) {
+            return ApiResponse::error(
+                'Validation error',
+                $e->errors(),
+                422
+            );
+        } catch (\Exception $e) {
+            Log::error('Error updating {{name}}', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return ApiResponse::error(
+                'Error updating {{name}}',
+                ['error' => $e->getMessage()]
+            );
+        }
     }
 
     public function destroy($id)
     {
-        $this->service->delete{{name}}($id);
-        return response()->json(['message' => '{{name}} deleted successfully.']);
+        try {
+            $result = $this->service->delete{{name}}($id);
+            
+            if (!$result) {
+                return ApiResponse::error(
+                    '{{name}} not found',
+                    ['id' => 'Record not found'],
+                    404
+                );
+            }
+
+            return ApiResponse::success(
+                null,
+                '{{name}} deleted successfully'
+            );
+        } catch (\Exception $e) {
+            Log::error('Error deleting {{name}}', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return ApiResponse::error(
+                'Error deleting {{name}}',
+                ['error' => $e->getMessage()]
+            );
+        }
     }
 }

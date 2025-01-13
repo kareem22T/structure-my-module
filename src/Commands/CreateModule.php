@@ -18,7 +18,6 @@ class CreateModule extends Command
 
         // Generate Model, Request, Resource, and Collection
         $this->call('make:model', ['name' => $name]);
-        $this->call('make:request', ['name' => "{$name}Request"]);
         $this->call('make:resource', ['name' => "{$name}Resource"]);
         $this->call('make:resource', ['name' => "{$name}Collection"]);
 
@@ -44,6 +43,16 @@ class CreateModule extends Command
                 'stub' => __DIR__ . '/../stubs/service.stub',
                 'target' => app_path("Services/{$name}Service.php"),
             ],
+            [
+                'name' => 'Store Request',
+                'stub' => __DIR__ . '/../stubs/store-request.stub',
+                'target' => app_path("Http/Requests/Store{$name}Request.php"),
+            ],
+            [
+                'name' => 'Update Request',
+                'stub' => __DIR__ . '/../stubs/update-request.stub',
+                'target' => app_path("Http/Requests/Update{$name}Request.php"),
+            ]
         ];
 
         // Create files from stubs
