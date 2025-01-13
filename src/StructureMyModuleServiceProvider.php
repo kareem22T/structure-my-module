@@ -3,7 +3,7 @@
 namespace Kareem22t\StructureMyModule;
 
 use Illuminate\Support\ServiceProvider;
-use Kareem22t\StructureMyModule\Commands\TestCommand;
+use Kareem22t\StructureMyModule\Commands\CreateModule;
 
 class StructureMyModuleServiceProvider extends ServiceProvider
 {
@@ -11,7 +11,7 @@ class StructureMyModuleServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                TestCommand::class
+                CreateModule::class
             ]);
         }
     }
