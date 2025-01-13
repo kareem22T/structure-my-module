@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\API{{prefix}};
 
+use App\Http\Controllers\Controller;
 use Kareem22t\StructureMyModule\ApiResponse;
-use App\Http\Resources\{{name}}Resource;
+use App\Http\Resources{{prefix}}\{{name}}Resource;
 use App\Services{{prefix}}\{{name}}Service;
 use App\Http\Requests{{prefix}}\Login{{name}}Request;
 use App\Http\Requests{{prefix}}\Register{{name}}Request;
