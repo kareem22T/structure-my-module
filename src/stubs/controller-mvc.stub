@@ -1,0 +1,112 @@
+<?php
+
+namespace App\Http\Controllers\Web{{prefix}};
+
+use App\Services\{{name}}Service;
+use App\Http\Requests\Store{{name}}Request;
+use App\Http\Requests\Update{{name}}Request;
+use Illuminate\Support\Facades\Log;
+
+class {{name}}Controller extends Controller
+{
+    protected $service;
+
+    public function __construct({{name}}Service $service)
+    {
+        $this->service = $service;
+    }
+
+    public function index()
+    {
+        try {
+            ${{names}} = $this->service->getAll{{names}}();
+            return view('{{name}}.index', compact('{{names}}'));
+        } catch (\Exception $e) {
+            Log::error('Error retrieving {{name}} list', ['error' => $e->getMessage()]);
+            return redirect()->route('home')->withErrors('Error retrieving {{name}} list');
+        }
+    }
+
+    public function show($id)
+    {
+        try {
+            ${{name}} = $this->service->get{{name}}ById($id);
+
+            if (!${{name}}) {
+                return redirect()->route('{{name}}.index')->withErrors('{{name}} not found');
+            }
+
+            return view('{{name}}.show', compact('{{name}}'));
+        } catch (\Exception $e) {
+            Log::error('Error retrieving {{name}}', ['error' => $e->getMessage()]);
+            return redirect()->route('{{name}}.index')->withErrors('Error retrieving {{name}}');
+        }
+    }
+
+    public function create()
+    {
+        return view('{{name}}.create');
+    }
+
+    public function store(Store{{name}}Request $request)
+    {
+        try {
+            $data = $request->validated();
+            $this->service->create{{name}}($data);
+
+            return redirect()->route('{{name}}.index')->with('success', '{{name}} created successfully');
+        } catch (\Exception $e) {
+            Log::error('Error creating {{name}}', ['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors('Error creating {{name}}')->withInput();
+        }
+    }
+
+    public function edit($id)
+    {
+        try {
+            ${{name}} = $this->service->get{{name}}ById($id);
+
+            if (!${{name}}) {
+                return redirect()->route('{{name}}.index')->withErrors('{{name}} not found');
+            }
+
+            return view('{{name}}.edit', compact('{{name}}'));
+        } catch (\Exception $e) {
+            Log::error('Error retrieving {{name}} for edit', ['error' => $e->getMessage()]);
+            return redirect()->route('{{name}}.index')->withErrors('Error retrieving {{name}}');
+        }
+    }
+
+    public function update(Update{{name}}Request $request, $id)
+    {
+        try {
+            $data = $request->validated();
+            ${{name}} = $this->service->update{{name}}($id, $data);
+
+            if (!${{name}}) {
+                return redirect()->route('{{name}}.index')->withErrors('{{name}} not found');
+            }
+
+            return redirect()->route('{{name}}.index')->with('success', '{{name}} updated successfully');
+        } catch (\Exception $e) {
+            Log::error('Error updating {{name}}', ['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors('Error updating {{name}}')->withInput();
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $result = $this->service->delete{{name}}($id);
+
+            if (!$result) {
+                return redirect()->route('{{name}}.index')->withErrors('{{name}} not found');
+            }
+
+            return redirect()->route('{{name}}.index')->with('success', '{{name}} deleted successfully');
+        } catch (\Exception $e) {
+            Log::error('Error deleting {{name}}', ['error' => $e->getMessage()]);
+            return redirect()->route('{{name}}.index')->withErrors('Error deleting {{name}}');
+        }
+    }
+}

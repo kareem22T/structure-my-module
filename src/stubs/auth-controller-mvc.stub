@@ -1,0 +1,81 @@
+<?php
+namespace App\Http\Controllers\Web{{prefix}};
+
+use App\Services\{{name}}Service;
+use App\Http\Requests\Login{{name}}Request;
+use App\Http\Requests\Register{{name}}Request;
+use App\Http\Requests\Update{{name}}Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
+class {{name}}Controller extends Controller
+{
+    protected $service;
+
+    public function __construct({{name}}Service $service)
+    {
+        $this->service = $service;
+    }
+
+    public function register(Register{{name}}Request $request)
+    {
+        try {
+            $data = $request->validated();
+            $user = $this->service->create{{name}}($data);
+            
+            Auth::login($user);
+            
+            return redirect()->route('home')->with('success', 'Registration successful');
+        } catch (\Exception $e) {
+            Log::error('Registration error', ['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors('Registration failed')->withInput();
+        }
+    }
+
+    public function login(Login{{name}}Request $request)
+    {
+        try {
+            $credentials = $request->validated();
+            
+            if (Auth::attempt($credentials)) {
+                return redirect()->intended('home');
+            }
+            
+            return redirect()->back()->withErrors('Invalid credentials')->withInput();
+        } catch (\Exception $e) {
+            Log::error('Login error', ['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors('Login failed')->withInput();
+        }
+    }
+
+    public function show()
+    {
+        try {
+            $user = Auth::user();
+            return view('{{name}}.profile', compact('user'));
+        } catch (\Exception $e) {
+            Log::error('Error retrieving user profile', ['error' => $e->getMessage()]);
+            return redirect()->route('home')->withErrors('Error retrieving profile');
+        }
+    }
+
+    public function update(Update{{name}}Request $request)
+    {
+        try {
+            $data = $request->validated();
+            $user = $this->service->update{{name}}(Auth::id(), $data);
+
+            return redirect()->route('profile')->with('success', 'Profile updated successfully');
+        } catch (\Exception $e) {
+            Log::error('Error updating profile', ['error' => $e->getMessage()]);
+            return redirect()->back()->withErrors('Error updating profile')->withInput();
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
+}
+

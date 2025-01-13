@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API{{prefix}};
 
 use Kareem22t\StructureMyModule\ApiResponse;
 use App\Http\Resources\{{name}}Resource;
 use App\Http\Resources\{{name}}Collection;
 use App\Services\{{name}}Service;
-use App\Http\Requests\{{name}}Request;
+use App\Http\Requests\Store{{name}}Request;
+use App\Http\Requests\Update{{name}}Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
 
@@ -60,7 +61,7 @@ class {{name}}Controller extends Controller
         }
     }
 
-    public function store({{name}}Request $request)
+    public function store(Store{{name}}Request $request)
     {
         try {
             $data = $request->validated();
@@ -89,7 +90,7 @@ class {{name}}Controller extends Controller
         }
     }
 
-    public function update({{name}}Request $request, $id)
+    public function update(Update{{name}}Request $request, $id)
     {
         try {
             $data = $request->validated();

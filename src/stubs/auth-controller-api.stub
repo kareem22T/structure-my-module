@@ -1,0 +1,104 @@
+<?php
+namespace App\Http\Controllers\API{{prefix}};
+
+use Kareem22t\StructureMyModule\ApiResponse;
+use App\Http\Resources\{{name}}Resource;
+use App\Services\{{name}}Service;
+use App\Http\Requests\Login{{name}}Request;
+use App\Http\Requests\Register{{name}}Request;
+use App\Http\Requests\Update{{name}}Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
+
+class {{name}}Controller extends Controller
+{
+    protected $service;
+
+    public function __construct({{name}}Service $service)
+    {
+        $this->service = $service;
+    }
+
+    public function register(Register{{name}}Request $request)
+    {
+        try {
+            $data = $request->validated();
+            $user = $this->service->create{{name}}($data);
+            $token = $user->createToken('auth_token')->plainTextToken;
+            
+            return ApiResponse::success([
+                'user' => new {{name}}Resource($user),
+                'token' => $token
+            ], 'Registration successful', 201);
+        } catch (ValidationException $e) {
+            return ApiResponse::error('Validation error', $e->errors(), 422);
+        } catch (\Exception $e) {
+            Log::error('Registration error', ['error' => $e->getMessage()]);
+            return ApiResponse::error('Registration failed', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function login(Login{{name}}Request $request)
+    {
+        try {
+            $credentials = $request->validated();
+            
+            if (!Auth::attempt($credentials)) {
+                return ApiResponse::error('Invalid credentials', [], 401);
+            }
+            
+            $user = Auth::user();
+            $token = $user->createToken('auth_token')->plainTextToken;
+            
+            return ApiResponse::success([
+                'user' => new {{name}}Resource($user),
+                'token' => $token
+            ], 'Login successful');
+        } catch (\Exception $e) {
+            Log::error('Login error', ['error' => $e->getMessage()]);
+            return ApiResponse::error('Login failed', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function show()
+    {
+        try {
+            $user = Auth::user();
+            return ApiResponse::success(
+                new {{name}}Resource($user),
+                'Profile retrieved successfully'
+            );
+        } catch (\Exception $e) {
+            return ApiResponse::error('Error retrieving profile', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function update(Update{{name}}Request $request)
+    {
+        try {
+            $data = $request->validated();
+            $user = $this->service->update{{name}}(Auth::id(), $data);
+            
+            return ApiResponse::success(
+                new {{name}}Resource($user),
+                'Profile updated successfully'
+            );
+        } catch (ValidationException $e) {
+            return ApiResponse::error('Validation error', $e->errors(), 422);
+        } catch (\Exception $e) {
+            Log::error('Error updating profile', ['error' => $e->getMessage()]);
+            return ApiResponse::error('Error updating profile', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function logout()
+    {
+        try {
+            Auth::user()->tokens()->delete();
+            return ApiResponse::success(null, 'Logged out successfully');
+        } catch (\Exception $e) {
+            return ApiResponse::error('Error logging out', ['error' => $e->getMessage()]);
+        }
+    }
+}
