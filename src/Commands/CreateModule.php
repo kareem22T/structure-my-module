@@ -78,20 +78,36 @@ class CreateModule extends Command
         $repository = "App\\Repositories\\{$name}Repository";
 
         $serviceProviderPath = app_path('Providers/AppServiceProvider.php');
-        $bindStatement = "\$this->app->bind({$interface}::class, {$repository}::class);";
+        $bindStatement = "        \$this->app->bind({$interface}::class, {$repository}::class);";
 
         if (File::exists($serviceProviderPath)) {
             $content = File::get($serviceProviderPath);
 
-            // Add the binding only if it doesn't exist
-            if (!Str::contains($content, $bindStatement)) {
-                $content = preg_replace(
-                    '/public function register\(\)\n\s*{\n/',
-                    "public function register()\n    {\n        {$bindStatement}\n",
-                    $content
-                );
-                File::put($serviceProviderPath, $content);
+            // Check if the register method exists and add the binding
+            if (Str::contains($content, 'public function register()')) {
+                // Ensure the bind statement doesn't already exist
+                if (!Str::contains($content, $bindStatement)) {
+                    // Add the binding inside the register method
+                    $updatedContent = preg_replace(
+                        '/(public function register\(\)\n\s*{\n)/',
+                        "$1{$bindStatement}\n",
+                        $content
+                    );
+
+                    if ($updatedContent) {
+                        File::put($serviceProviderPath, $updatedContent);
+                    } else {
+                        // Fallback: Add the bind statement manually
+                        $this->warn("Unable to update the register method automatically. Adding bind manually.");
+                    }
+                } else {
+                    $this->info("Binding already exists in AppServiceProvider.");
+                }
+            } else {
+                $this->error("No 'register' method found in AppServiceProvider. Please add the binding manually.");
             }
+        } else {
+            $this->error("AppServiceProvider.php not found.");
         }
     }
 }
