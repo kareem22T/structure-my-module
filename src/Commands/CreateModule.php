@@ -4,6 +4,7 @@ namespace Kareem22t\StructureMyModule\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class CreateModule extends Command
 {
