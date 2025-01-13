@@ -54,7 +54,7 @@ class CreateModule extends Command
 
         // Update AppServiceProvider to bind the repository
         $this->updateServiceProvider($name);
-        $this->info("Repository binding added to AppServiceProvider.");
+        $this->info("Repository binding added to AppServiceProvider v1.");
     }
 
     /**
