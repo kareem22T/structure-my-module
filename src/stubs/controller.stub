@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Resources\{{name}}Resource;
@@ -29,12 +30,14 @@ class {{name}}Controller extends Controller
 
     public function store({{name}}Request $request)
     {
+        $data = $request->validated();
         $entity = $this->service->create{{name}}($data);
         return new {{name}}Resource($entity);
     }
 
     public function update({{name}}Request $request, $id)
     {
+        $data = $request->validated();
         $entity = $this->service->update{{name}}($id, $data);
         return new {{name}}Resource($entity);
     }

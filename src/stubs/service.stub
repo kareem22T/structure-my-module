@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Services;
+
+use App\Repositories\{{name}}RepositoryInterface;
+
+class {{name}}Service
+{
+    protected $repository;
+
+    public function __construct({{name}}RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function getAll{{names}}()
+    {
+        return $this->repository->getAll();
+    }
+
+    public function get{{name}}ById($id)
+    {
+        return $this->repository->findById($id);
+    }
+
+    public function create{{name}}(array $data)
+    {
+        return $this->repository->create($data);
+    }
+
+    public function update{{name}}($id, array $data)
+    {
+        return $this->repository->update($id, $data);
+    }
+
+    public function delete{{name}}($id)
+    {
+        return $this->repository->delete($id);
+    }
+}

@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\{{name}};
+
+class {{name}}Repository implements {{name}}RepositoryInterface
+{
+    protected $model;
+
+    public function __construct({{name}} $model)
+    {
+        $this->model = $model;
+    }
+
+    public function getAll()
+    {
+        return $this->model->all();
+    }
+
+    public function findById($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    public function create(array $data)
+    {
+        return $this->model->create($data);
+    }
+
+    public function update($id, array $data)
+    {
+        $entity = $this->model->findOrFail($id);
+        $entity->update($data);
+        return $entity;
+    }
+
+    public function delete($id)
+    {
+        $entity = $this->model->findOrFail($id);
+        $entity->delete();
+    }
+}
