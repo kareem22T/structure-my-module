@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Web{{prefix}};
 
-use App\Services\{{name}}Service;
-use App\Http\Requests\Store{{name}}Request;
-use App\Http\Requests\Update{{name}}Request;
+use App\Services\{{prefix}}{{name}}Service;
+use App\Http\Requests\{{prefix}}Store{{name}}Request;
+use App\Http\Requests\{{prefix}}Update{{name}}Request;
 use Illuminate\Support\Facades\Log;
 
 class {{name}}Controller extends Controller

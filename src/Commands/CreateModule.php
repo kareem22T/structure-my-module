@@ -96,12 +96,12 @@ class CreateModule extends Command
                     [
                         'name' => 'Store Request',
                         'stub' => __DIR__ . '/../stubs/store-request.stub',
-                        'target' => app_path("Http/Requests/Store{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Store{$name}Request.php"),
                     ],
                     [
                         'name' => 'Update Request',
                         'stub' => __DIR__ . '/../stubs/update-request.stub',
-                        'target' => app_path("Http/Requests/Update{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Update{$name}Request.php"),
                     ]
                 ]);
 
@@ -120,17 +120,17 @@ class CreateModule extends Command
                     [
                         'name' => 'Login Request',
                         'stub' => __DIR__ . '/../stubs/login-request.stub',
-                        'target' => app_path("Http/Requests/Login{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Login{$name}Request.php"),
                     ],
                     [
                         'name' => 'Register Request',
                         'stub' => __DIR__ . '/../stubs/register-request.stub',
-                        'target' => app_path("Http/Requests/Register{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Register{$name}Request.php"),
                     ],
                     [
                         'name' => 'Update Request',
                         'stub' => __DIR__ . '/../stubs/update-request.stub',
-                        'target' => app_path("Http/Requests/Update{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Update{$name}Request.php"),
                     ]
                 ]);
             case 'mvc':
@@ -143,12 +143,12 @@ class CreateModule extends Command
                     [
                         'name' => 'Store Request',
                         'stub' => __DIR__ . '/../stubs/store-request.stub',
-                        'target' => app_path("Http/Requests/Store{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Store{$name}Request.php"),
                     ],
                     [
                         'name' => 'Update Request',
                         'stub' => __DIR__ . '/../stubs/update-request.stub',
-                        'target' => app_path("Http/Requests/Update{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Update{$name}Request.php"),
                     ]
                 ]);
 
@@ -162,12 +162,12 @@ class CreateModule extends Command
                     [
                         'name' => 'Store Request',
                         'stub' => __DIR__ . '/../stubs/store-request.stub',
-                        'target' => app_path("Http/Requests/Store{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Store{$name}Request.php"),
                     ],
                     [
                         'name' => 'Update Request',
                         'stub' => __DIR__ . '/../stubs/update-request.stub',
-                        'target' => app_path("Http/Requests/Update{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Update{$name}Request.php"),
                     ]
                 ]);
 
@@ -181,17 +181,17 @@ class CreateModule extends Command
                     [
                         'name' => 'Login Request',
                         'stub' => __DIR__ . '/../stubs/login-request.stub',
-                        'target' => app_path("Http/Requests/Login{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Login{$name}Request.php"),
                     ],
                     [
                         'name' => 'Register Request',
                         'stub' => __DIR__ . '/../stubs/register-request.stub',
-                        'target' => app_path("Http/Requests/Register{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Register{$name}Request.php"),
                     ],
                     [
                         'name' => 'Update Request',
                         'stub' => __DIR__ . '/../stubs/update-request.stub',
-                        'target' => app_path("Http/Requests/Update{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Update{$name}Request.php"),
                     ]
                 ]);
 
@@ -205,17 +205,17 @@ class CreateModule extends Command
                     [
                         'name' => 'Login Request',
                         'stub' => __DIR__ . '/../stubs/login-request.stub',
-                        'target' => app_path("Http/Requests/Login{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Login{$name}Request.php"),
                     ],
                     [
                         'name' => 'Register Request',
                         'stub' => __DIR__ . '/../stubs/register-request.stub',
-                        'target' => app_path("Http/Requests/Register{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Register{$name}Request.php"),
                     ],
                     [
                         'name' => 'Update Request',
                         'stub' => __DIR__ . '/../stubs/update-request.stub',
-                        'target' => app_path("Http/Requests/Update{{prefix}}{$name}Request.php"),
+                        'target' => app_path("Http/Requests/{{prefix}}Update{$name}Request.php"),
                     ]
                 ]);
         }
