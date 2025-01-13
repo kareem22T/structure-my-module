@@ -94,31 +94,7 @@ The command generates different files based on the module type:
 
 After generating your module, follow these steps to complete the setup:
 
-### 1. Create and Run Migration
-
-Create a migration file for your module if it doesn't exist:
-
-```bash
-php artisan make:migration create_[module_name_plural]_table
-```
-
-Example migration for a User module:
-
-```php
-// database/migrations/xxxx_xx_xx_create_users_table.php
-public function up(): void
-{
-    Schema::create('users', function (Blueprint $table) {
-        $table->id();
-        $table->string('name');
-        $table->string('email')->unique();
-        $table->string('password');
-        $table->timestamps();
-    });
-}
-```
-
-Run the migration:
+### 1. Run Migration
 
 ```bash
 php artisan migrate
