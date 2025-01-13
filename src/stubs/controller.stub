@@ -1,0 +1,47 @@
+<?php
+namespace App\Http\Controllers;
+
+use App\Http\Resources\{{name}}Resource;
+use App\Http\Resources\{{name}}Collection;
+use App\Services\{{name}}Service;
+use App\Http\Requests\{{name}}Request;
+
+class {{name}}Controller extends Controller
+{
+    protected $service;
+
+    public function __construct({{name}}Service $service)
+    {
+        $this->service = $service;
+    }
+
+    public function index()
+    {
+        $entities = $this->service->getAll{{names}}();
+        return new {{name}}Collection($entities);
+    }
+
+    public function show($id)
+    {
+        $entity = $this->service->get{{name}}ById($id);
+        return new {{name}}Resource($entity);
+    }
+
+    public function store({{name}}Request $request)
+    {
+        $entity = $this->service->create{{name}}($data);
+        return new {{name}}Resource($entity);
+    }
+
+    public function update({{name}}Request $request, $id)
+    {
+        $entity = $this->service->update{{name}}($id, $data);
+        return new {{name}}Resource($entity);
+    }
+
+    public function destroy($id)
+    {
+        $this->service->delete{{name}}($id);
+        return response()->json(['message' => '{{name}} deleted successfully.']);
+    }
+}
