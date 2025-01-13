@@ -3,10 +3,10 @@ namespace App\Http\Controllers\API{{prefix}};
 
 use Kareem22t\StructureMyModule\ApiResponse;
 use App\Http\Resources\{{name}}Resource;
-use App\Services\{{prefix}}{{name}}Service;
-use App\Http\Requests\{{prefix}}Login{{name}}Request;
-use App\Http\Requests\{{prefix}}Register{{name}}Request;
-use App\Http\Requests\{{prefix}}Update{{name}}Request;
+use App\Services{{prefix}}\{{name}}Service;
+use App\Http\Requests{{prefix}}\Login{{name}}Request;
+use App\Http\Requests{{prefix}}\Register{{name}}Request;
+use App\Http\Requests{{prefix}}\Update{{name}}Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
