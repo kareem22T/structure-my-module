@@ -40,7 +40,7 @@ class CreateModule extends Command
         $prefixWithAppendSlashAfter = $prefix ? $prefix . '/' : '';
 
         // Generate Model, Resource for all types
-        $this->call('make:model', ['name' => $name]);
+        $this->call('make:model', ['name' => $name, '--migration' => true]);
 
         // Generate collection for API types
         if (in_array($type, ['api', 'auth-sanctum', 'both', 'auth-both'])) {
