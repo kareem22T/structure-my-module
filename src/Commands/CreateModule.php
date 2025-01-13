@@ -55,7 +55,7 @@ class CreateModule extends Command
         foreach ($stubPaths as $stubPath) {
             $target = $prefix ? str_replace('{{prefix}}', $prefix . '/', $stubPath['target']) : str_replace('{{prefix}}', '', $stubPath['target']);
             $this->createFileFromStub($stubPath['stub'], $target, $name, $pluralName, $prefix);
-            $this->info("{$stubPath['name']} created at: {$target}");
+            $this->info("INFO: [{$stubPath['name']}] created successfully at: {$target}");
         }
     }
 
