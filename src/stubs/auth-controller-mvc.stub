@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Web{{prefix}};
 
 use App\Http\Controllers\Controller;
@@ -16,6 +17,26 @@ class {{name}}Controller extends Controller
     public function __construct({{name}}Service $service)
     {
         $this->service = $service;
+    }
+
+    public function showLoginForm()
+    {
+        try {
+            return view('{{name}}.login');
+        } catch (\Exception $e) {
+            Log::error('Error displaying login form', ['error' => $e->getMessage()]);
+            return redirect()->route('home')->withErrors('Unable to load the login page.');
+        }
+    }
+
+    public function showRegistrationForm()
+    {
+        try {
+            return view('{{name}}.register');
+        } catch (\Exception $e) {
+            Log::error('Error displaying registration form', ['error' => $e->getMessage()]);
+            return redirect()->route('home')->withErrors('Unable to load the registration page.');
+        }
     }
 
     public function register(Register{{name}}Request $request)
@@ -79,4 +100,3 @@ class {{name}}Controller extends Controller
         return redirect()->route('login');
     }
 }
-
