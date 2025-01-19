@@ -36,7 +36,7 @@ class CreateModule extends Command
             return Command::INVALID;
         }
 
-        $pluralName = Str::plural($name);
+        $pluralName = Str::lower(Str::plural($name));
         $prefixWithAppendSlashAfter = $prefix ? $prefix . '/' : '';
 
         // Generate Model, Resource for all types

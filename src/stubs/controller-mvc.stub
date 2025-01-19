@@ -21,7 +21,7 @@ class {{name}}Controller extends Controller
     {
         try {
             ${{names}} = $this->service->getAll{{names}}();
-            return view('{{name}}.index', compact('{{names}}'));
+            return view('{{names}}.index', compact('{{names}}'));
         } catch (\Exception $e) {
             Log::error('Error retrieving {{name}} list', ['error' => $e->getMessage()]);
             return redirect()->route('home')->withErrors('Error retrieving {{name}} list');
@@ -34,19 +34,19 @@ class {{name}}Controller extends Controller
             ${{name}} = $this->service->get{{name}}ById($id);
 
             if (!${{name}}) {
-                return redirect()->route('{{name}}.index')->withErrors('{{name}} not found');
+                return redirect()->route('{{names}}.index')->withErrors('{{name}} not found');
             }
 
-            return view('{{name}}.show', compact('{{name}}'));
+            return view('{{names}}.show', compact('{{name}}'));
         } catch (\Exception $e) {
             Log::error('Error retrieving {{name}}', ['error' => $e->getMessage()]);
-            return redirect()->route('{{name}}.index')->withErrors('Error retrieving {{name}}');
+            return redirect()->route('{{names}}.index')->withErrors('Error retrieving {{name}}');
         }
     }
 
     public function create()
     {
-        return view('{{name}}.create');
+        return view('{{names}}.create');
     }
 
     public function store(Store{{name}}Request $request)
@@ -55,7 +55,7 @@ class {{name}}Controller extends Controller
             $data = $request->validated();
             $this->service->create{{name}}($data);
 
-            return redirect()->route('{{name}}.index')->with('success', '{{name}} created successfully');
+            return redirect()->route('{{names}}.index')->with('success', '{{name}} created successfully');
         } catch (\Exception $e) {
             Log::error('Error creating {{name}}', ['error' => $e->getMessage()]);
             return redirect()->back()->withErrors('Error creating {{name}}')->withInput();
@@ -68,13 +68,13 @@ class {{name}}Controller extends Controller
             ${{name}} = $this->service->get{{name}}ById($id);
 
             if (!${{name}}) {
-                return redirect()->route('{{name}}.index')->withErrors('{{name}} not found');
+                return redirect()->route('{{names}}.index')->withErrors('{{name}} not found');
             }
 
-            return view('{{name}}.edit', compact('{{name}}'));
+            return view('{{names}}.edit', compact('{{name}}'));
         } catch (\Exception $e) {
             Log::error('Error retrieving {{name}} for edit', ['error' => $e->getMessage()]);
-            return redirect()->route('{{name}}.index')->withErrors('Error retrieving {{name}}');
+            return redirect()->route('{{names}}.index')->withErrors('Error retrieving {{name}}');
         }
     }
 
@@ -85,10 +85,10 @@ class {{name}}Controller extends Controller
             ${{name}} = $this->service->update{{name}}($id, $data);
 
             if (!${{name}}) {
-                return redirect()->route('{{name}}.index')->withErrors('{{name}} not found');
+                return redirect()->route('{{names}}.index')->withErrors('{{name}} not found');
             }
 
-            return redirect()->route('{{name}}.index')->with('success', '{{name}} updated successfully');
+            return redirect()->route('{{names}}.index')->with('success', '{{name}} updated successfully');
         } catch (\Exception $e) {
             Log::error('Error updating {{name}}', ['error' => $e->getMessage()]);
             return redirect()->back()->withErrors('Error updating {{name}}')->withInput();
@@ -100,10 +100,10 @@ class {{name}}Controller extends Controller
         try {
             $result = $this->service->delete{{name}}($id);
 
-            return redirect()->route('{{name}}.index')->with('success', '{{name}} deleted successfully');
+            return redirect()->route('{{names}}.index')->with('success', '{{name}} deleted successfully');
         } catch (\Exception $e) {
             Log::error('Error deleting {{name}}', ['error' => $e->getMessage()]);
-            return redirect()->route('{{name}}.index')->withErrors('Error deleting {{name}}');
+            return redirect()->route('{{names}}.index')->withErrors('Error deleting {{name}}');
         }
     }
 }
