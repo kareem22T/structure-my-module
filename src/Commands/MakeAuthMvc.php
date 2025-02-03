@@ -30,67 +30,67 @@ class MakeAuthMvc extends Command
         $stubPaths = [
             [
                 'name' => 'Repository Interface',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/interface.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/interface.stub',
                 'target' => app_path("Repositories/Web/{$name}/Auth/AuthRepositoryInterface.php"),
             ],
             [
                 'name' => 'Repository Implementation',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/repo.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/repo.stub',
                 'target' => app_path("Repositories/Web/{$name}/Auth/AuthRepository.php"),
             ],
             [
                 'name' => 'Service',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/service.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/service.stub',
                 'target' => app_path("Services/Web/{$name}/Auth/AuthService.php"),
             ],
             [
                 'name' => 'Controller',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/controller.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/controller.stub',
                 'target' => app_path("Http/Controllers/Web/{$name}/Auth/AuthController.php"),
             ],
             [
                 'name' => 'Register Request',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/register_request.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/register_request.stub',
                 'target' => app_path("Http/Requests/Web/{$name}/RegisterRequest.php"),
             ],
             [
                 'name' => 'Login Request',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/login_request.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/login_request.stub',
                 'target' => app_path("Http/Requests/Web/{$name}/LoginRequest.php"),
             ],
             [
                 'name' => 'Update Profile Request',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/update_profile_request.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/update_profile_request.stub',
                 'target' => app_path("Http/Requests/Web/{$name}/UpdateProfileRequest.php"),
             ],
             [
                 'name' => 'Error Partial Component',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/_errors_blade.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/_errors_blade.stub',
                 'target' => resource_path("views/{$lowercase_name}/auth/_errors.blade.php"),
             ],
             [
                 'name' => 'Message Partial Component',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/_message_blade.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/_message_blade.stub',
                 'target' => resource_path("views/{$lowercase_name}/auth/_messages.blade.php"),
             ],
             [
                 'name' => 'Login Blade',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/login_blade.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/login_blade.stub',
                 'target' => resource_path("views/{$lowercase_name}/auth/login.blade.php"),
             ],
             [
                 'name' => 'Register Blade',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/register_blade.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/register_blade.stub',
                 'target' => resource_path("views/{$lowercase_name}/auth/register.blade.php"),
             ],
             [
                 'name' => 'Update Profile Blade',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/edit_profile_blade.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/edit_profile_blade.stub',
                 'target' => resource_path("views/{$lowercase_name}/auth/edit-profile.blade.php"),
             ],
             [
                 'name' => 'Show Profile Blade',
-                'stub' => __DIR__ . '/../../stubs/auth-mvc/profile_blade.stub',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/profile_blade.stub',
                 'target' => resource_path("views/{$lowercase_name}/auth/profile.blade.php"),
             ],
         ];
