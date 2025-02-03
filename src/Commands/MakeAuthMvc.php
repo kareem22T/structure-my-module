@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class MakeAuthMvcModule extends Command
+class MakeAuthMvc extends Command
 {
     protected $signature = 'make:auth-mvc {name}';
     protected $description = 'Create an auth MVC module with a controller, repository, service, and related files.';

@@ -4,7 +4,7 @@ namespace Kareem22t\StructureMyModule;
 
 use Illuminate\Support\ServiceProvider;
 use Kareem22t\StructureMyModule\Commands\CreateModule;
-use Kareem22t\StructureMyModule\Commands\MakeAuthMvcModule;
+use Kareem22t\StructureMyModule\Commands\MakeAuthMvc;
 
 class StructureMyModuleServiceProvider extends ServiceProvider
 {
@@ -13,7 +13,7 @@ class StructureMyModuleServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 CreateModule::class,
-                MakeAuthMvcModule::class,
+                MakeAuthMvc::class,
             ]);
         }
     }
