@@ -57,12 +57,6 @@ class AuthController extends Controller
         return view('{{lowercase_name}}.auth.profile', compact('user'));
     }
 
-    public function getProfile(): View
-    {
-        $user = $this->authService->getProfile();
-        return view('{{lowercase_name}}.auth.profile', compact('user'));
-    }
-
     public function showUpdateProfileForm(): View
     {
         $user = $this->authService->getProfile();
