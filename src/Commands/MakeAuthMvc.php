@@ -51,17 +51,17 @@ class MakeAuthMvc extends Command
             [
                 'name' => 'Register Request',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/register_request.stub',
-                'target' => app_path("Http/Requests/Web/{$name}/RegisterRequest.php"),
+                'target' => app_path("Http/Requests/Web/{$name}/Auth/RegisterRequest.php"),
             ],
             [
                 'name' => 'Login Request',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/login_request.stub',
-                'target' => app_path("Http/Requests/Web/{$name}/LoginRequest.php"),
+                'target' => app_path("Http/Requests/Web/{$name}/Auth/LoginRequest.php"),
             ],
             [
                 'name' => 'Update Profile Request',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/update_profile_request.stub',
-                'target' => app_path("Http/Requests/Web/{$name}/UpdateProfileRequest.php"),
+                'target' => app_path("Http/Requests/Web/{$name}/Auth/UpdateProfileRequest.php"),
             ],
             [
                 'name' => 'Error Partial Component',

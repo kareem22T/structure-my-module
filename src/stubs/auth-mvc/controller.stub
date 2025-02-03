@@ -17,8 +17,6 @@ class AuthController extends Controller
     public function __construct(AuthService $authService)
     {
         $this->authService = $authService;
-        $this->middleware('guest')->except(['getProfile', 'updateProfile', 'logout']);
-        $this->middleware('auth')->only(['getProfile', 'updateProfile', 'logout']);
     }
 
     public function showLoginForm(): View
