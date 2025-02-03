@@ -103,7 +103,7 @@ class MakeAuthMvcModule extends Command
         }
     }
 
-    protected function createFileFromStub($stubPath, $targetPath, $name, $pluralName, $prefix = null)
+    protected function createFileFromStub($stubPath, $targetPath, $name, $lowercase_name)
     {
         $stubContent = File::get($stubPath);
         $content = str_replace(
