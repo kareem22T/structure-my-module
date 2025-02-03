@@ -1,0 +1,87 @@
+<?php
+
+namespace App\Http\Controllers\Web\{{name}}\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\{{name}}\Auth\LoginRequest;
+use App\Http\Requests\Web\{{name}}\Auth\RegisterRequest;
+use App\Http\Requests\Web\{{name}}\Auth\UpdateProfileRequest;
+use App\Services\Web\{{name}}\Auth\AuthService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+
+class AuthController extends Controller
+{
+    private $authService;
+
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+        $this->middleware('guest')->except(['getProfile', 'updateProfile', 'logout']);
+        $this->middleware('auth')->only(['getProfile', 'updateProfile', 'logout']);
+    }
+
+    public function showLoginForm(): View
+    {
+        return view('{{lowercase_name}}.auth.login');
+    }
+
+    public function login(LoginRequest $request): RedirectResponse
+    {
+        try {
+            $this->authService->login($request->validated());
+            return redirect()->route('{{lowercase_name}}.profile')->with('success', 'Successfully logged in!');
+        } catch (\Exception $e) {
+            return back()->withErrors(['email' => $e->getMessage()])->withInput();
+        }
+    }
+
+    public function showRegistrationForm(): View
+    {
+        return view('{{lowercase_name}}.auth.register');
+    }
+
+    public function register(RegisterRequest $request): RedirectResponse
+    {
+        try {
+            $this->authService->register($request->validated());
+            return redirect()->route('{{lowercase_name}}.profile')->with('success', 'Registration successful!');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()])->withInput();
+        }
+    }
+
+    public function showProfileForm(): View
+    {
+        $user = $this->authService->getProfile();
+        return view('{{lowercase_name}}.auth.profile', compact('user'));
+    }
+
+    public function getProfile(): View
+    {
+        $user = $this->authService->getProfile();
+        return view('{{lowercase_name}}.auth.profile', compact('user'));
+    }
+
+    public function showUpdateProfileForm(): View
+    {
+        $user = $this->authService->getProfile();
+        return view('{{lowercase_name}}.auth.edit-profile', compact('user'));
+    }
+
+    public function updateProfile(UpdateProfileRequest $request): RedirectResponse
+    {
+        try {
+            $this->authService->updateProfile($request->validated());
+            return redirect()->route('{{lowercase_name}}.profile')->with('success', 'Profile updated successfully!');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()])->withInput();
+        }
+    }
+
+    public function logout(): RedirectResponse
+    {
+        $this->authService->logout();
+        return redirect()->route('{{lowercase_name}}.login')->with('success', 'Successfully logged out!');
+    }
+}

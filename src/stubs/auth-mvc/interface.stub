@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Repositories\Web\{{name}}\Auth;
+
+use App\Models\User;
+
+interface AuthRepositoryInterface
+{
+    public function createUser(array $data): User;
+    public function updateUser(User $user, array $data): bool;
+}

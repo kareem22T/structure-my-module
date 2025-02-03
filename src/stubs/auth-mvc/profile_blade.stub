@@ -1,0 +1,17 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <h2>Welcome, {{ Auth::guard('{{lowercase_name}}')->user()->name }}</h2>
+
+        @include('{{lowercase_name}}.auth._messages')
+
+        <p>Email: {{ Auth::guard('{{lowercase_name}}')->user()->email }}</p>
+
+        <a href="{{ route('{{lowercase_name}}.edit-profile') }}">Edit Profile</a>
+        <form action="{{ route('{{lowercase_name}}.logout') }}" method="POST" style="display: inline;">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+@endsection

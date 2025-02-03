@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Services\Web\{{name}}\Auth;
+
+use App\Repositories\Web\{{name}}\Auth\AuthRepository;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+
+class AuthService
+{
+    private $authRepository;
+
+    public function __construct(AuthRepository $authRepository)
+    {
+        $this->authRepository = $authRepository;
+    }
+
+    public function login(array $credentials): bool
+    {
+        if (!Auth::attempt($credentials)) {
+            throw new \Exception('Invalid login credentials.');
+        }
+
+        return true;
+    }
+
+    public function register(array $data): User
+    {
+        return $this->authRepository->createUser($data);
+    }
+
+    public function getProfile(): User
+    {
+        return Auth::user();
+    }
+
+    public function updateProfile(array $data): bool
+    {
+        $user = Auth::user();
+        return $this->authRepository->updateUser($user, $data);
+    }
+
+    public function logout(): void
+    {
+        Auth::logout();
+    }
+}
