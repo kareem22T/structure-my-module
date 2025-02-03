@@ -23,6 +23,9 @@ class MakeAuthMvcModule extends Command
             return Command::INVALID;
         }
 
+        // Generate Model, Resource for all types
+        $this->call('make:model', ['name' => $name, '-m' => true]);
+
         // Define stubs for auth-mvc
         $stubPaths = [
             [
