@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container">
-        <h2>Welcome, {{ Auth::guard('{{lowercase_name}}')->user()->name }}</h2>
+        <h2>Welcome, {{ Auth::guard('{{guard_name}}')->user()->name }}</h2>
 
         @include('{{lowercase_name}}.auth._messages')
 
-        <p>Email: {{ Auth::guard('{{lowercase_name}}')->user()->email }}</p>
+        <p>Email: {{ Auth::guard('{{guard_name}}')->user()->email }}</p>
 
         <a href="{{ route('{{lowercase_name}}.edit-profile') }}">Edit Profile</a>
         <form action="{{ route('{{lowercase_name}}.logout') }}" method="POST" style="display: inline;">

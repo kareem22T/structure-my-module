@@ -18,7 +18,7 @@ class AuthService
 
     public function login(array $credentials): bool
     {
-        if (!Auth::attempt($credentials)) {
+        if (!Auth::guard('{{guard_name}}')->attempt($credentials)) {
             throw new \Exception('Invalid login credentials.');
         }
 
@@ -32,17 +32,17 @@ class AuthService
 
     public function getProfile(): User
     {
-        return Auth::user();
+        return Auth::guard('{{guard_name}}')->user();
     }
 
     public function updateProfile(array $data): bool
     {
-        $user = Auth::user();
+        $user = Auth::guard('{{guard_name}}')->user();
         return $this->authRepository->updateUser($user, $data);
     }
 
     public function logout(): void
     {
-        Auth::logout();
+        Auth::guard('{{guard_name}}')->logout();
     }
 }

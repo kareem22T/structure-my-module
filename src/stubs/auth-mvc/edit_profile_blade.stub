@@ -13,11 +13,11 @@
 
             <div>
                 <label>Name:</label>
-                <input type="text" name="name" value="{{ Auth::guard('{{lowercase_name}}')->user()->name }}">
+                <input type="text" name="name" value="{{ Auth::guard('{{guard_name}}')->user()->name }}">
             </div>
             <div>
                 <label>Email:</label>
-                <input type="email" name="email" value="{{ Auth::guard('{{lowercase_name}}')->user()->email }}">
+                <input type="email" name="email" value="{{ Auth::guard('{{guard_name}}')->user()->email }}">
             </div>
             <div>
                 <label>New Password (optional):</label>
