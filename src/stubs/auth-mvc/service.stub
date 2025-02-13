@@ -38,6 +38,11 @@ class AuthService
     public function updateProfile(array $data): bool
     {
         $user = Auth::guard('{{guard_name}}')->user();
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        } else {
+            unset($data['password']);
+        }
         return $this->authRepository->updateUser($user, $data);
     }
 

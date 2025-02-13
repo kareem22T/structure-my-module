@@ -83,6 +83,11 @@ class MakeAuthMvc extends Command
         if ($generateViews) {
             $viewStubs = [
                 [
+                    'name' => 'Layout',
+                    'stub' => __DIR__ . '/../stubs/auth-mvc/layout.stub',
+                    'target' => resource_path("views/{$lowercase_name}/layouts/auth.blade.php"),
+                ],
+                [
                     'name' => 'Error Partial Component',
                     'stub' => __DIR__ . '/../stubs/auth-mvc/_errors_blade.stub',
                     'target' => resource_path("views/{$lowercase_name}/auth/_errors.blade.php"),
