@@ -33,37 +33,37 @@ class MakeAuthMvc extends Command
             [
                 'name' => 'Repository Interface',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/interface.stub',
-                'target' => app_path("Repositories/{$name}/Auth/AuthRepositoryInterface.php"),
+                'target' => app_path("Repositories/Web/{$name}/Auth/AuthRepositoryInterface.php"),
             ],
             [
                 'name' => 'Repository Implementation',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/repo.stub',
-                'target' => app_path("Repositories/{$name}/Auth/AuthRepository.php"),
+                'target' => app_path("Repositories/Web/{$name}/Auth/AuthRepository.php"),
             ],
             [
                 'name' => 'Service',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/service.stub',
-                'target' => app_path("Services/{$name}/Auth/AuthService.php"),
+                'target' => app_path("Services/Web/{$name}/Auth/AuthService.php"),
             ],
             [
                 'name' => 'Controller',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/controller.stub',
-                'target' => app_path("Http/Controllers/{$name}/Auth/AuthController.php"),
+                'target' => app_path("Http/Controllers/Web/{$name}/Auth/AuthController.php"),
             ],
             [
                 'name' => 'Register Request',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/register_request.stub',
-                'target' => app_path("Http/Requests/{$name}/Auth/RegisterRequest.php"),
+                'target' => app_path("Http/Requests/Web/{$name}/Auth/RegisterRequest.php"),
             ],
             [
                 'name' => 'Login Request',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/login_request.stub',
-                'target' => app_path("Http/Requests/{$name}/Auth/LoginRequest.php"),
+                'target' => app_path("Http/Requests/Web/{$name}/Auth/LoginRequest.php"),
             ],
             [
                 'name' => 'Update Profile Request',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/update_profile_request.stub',
-                'target' => app_path("Http/Requests/{$name}/Auth/UpdateProfileRequest.php"),
+                'target' => app_path("Http/Requests/Web/{$name}/Auth/UpdateProfileRequest.php"),
             ],
         ];
 
