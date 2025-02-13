@@ -18,6 +18,7 @@ class MakeAuthMvc extends Command
         $lowercase_name = Str::lower($this->argument('name'));
         $guard = $this->option('guard') ?? 'web'; // Default to 'web' if not provided
         $generateViews = $this->option('views'); // Check if --view flag is passed
+        $plural_name = Str::plural($lowercase_name);
 
         // Validate name (uppercase and singular)
         if ($name !== Str::ucfirst(Str::singular($name))) {
@@ -25,11 +26,18 @@ class MakeAuthMvc extends Command
             return Command::INVALID;
         }
 
-        // Generate Model, Resource for all types
-        $this->call('make:model', ['name' => $name, '-m' => true]);
-
         // Define stubs for auth-mvc
         $stubPaths = [
+            [
+                'name' => 'Add Model',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/model.stub',
+                'target' => app_path("App/Models/{$name}.php"),
+            ],
+            [
+                'name' => 'Add Migration',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/migration.stub',
+                'target' => database_path("migrations/" . now()->format('Y_m_d_His') . "_create_{$plural_name}_table.php"),
+            ],
             [
                 'name' => 'Repository Interface',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/interface.stub',
@@ -107,17 +115,17 @@ class MakeAuthMvc extends Command
         // Create files from stubs
         foreach ($stubPaths as $stubPath) {
             $target = $stubPath['target'];
-            $this->createFileFromStub($stubPath['stub'], $target, $name, $lowercase_name, $guard);
+            $this->createFileFromStub($stubPath['stub'], $target, $name, $lowercase_name, $guard, $plural_name);
             $this->info("INFO: [{$stubPath['name']}] created successfully at: {$target}");
         }
     }
 
-    protected function createFileFromStub($stubPath, $targetPath, $name, $lowercase_name, $guard)
+    protected function createFileFromStub($stubPath, $targetPath, $name, $lowercase_name, $guard, $plural_name)
     {
         $stubContent = File::get($stubPath);
         $content = str_replace(
-            ['{{name}}', '{{lowercase_name}}', '{{guard_name}}'],
-            [$name, $lowercase_name, $guard],
+            ['{{name}}', '{{lowercase_name}}', '{{guard_name}}', '{{plural_name}}'],
+            [$name, $lowercase_name, $guard, $plural_name],
             $stubContent
         );
 

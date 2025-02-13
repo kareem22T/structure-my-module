@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Web\{{name}}\Auth;
 
-use App\Models\User;
+use App\Models\{{name}};
 use Illuminate\Support\Facades\Hash;
 
 class AuthRepository implements AuthRepositoryInterface
 {
-    public function createUser(array $data): User
+    public function createUser(array $data): {{name}}
     {
-        return User::create([
+        return {{name}}::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),

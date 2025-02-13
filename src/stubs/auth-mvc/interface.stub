@@ -2,10 +2,10 @@
 
 namespace App\Repositories\Web\{{name}}\Auth;
 
-use App\Models\User;
+use App\Models\{{name}};
 
 interface AuthRepositoryInterface
 {
-    public function createUser(array $data): User;
-    public function updateUser(User $user, array $data): bool;
+    public function createUser(array $data): {{name}};
+    public function updateUser({{name}} $user, array $data): bool;
 }

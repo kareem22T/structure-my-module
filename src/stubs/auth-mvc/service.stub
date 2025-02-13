@@ -5,7 +5,7 @@ namespace App\Services\Web\{{name}}\Auth;
 use App\Repositories\Web\{{name}}\Auth\AuthRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use App\Models\{{name}};
 
 class AuthService
 {
@@ -25,12 +25,12 @@ class AuthService
         return true;
     }
 
-    public function register(array $data): User
+    public function register(array $data): {{name}}
     {
         return $this->authRepository->createUser($data);
     }
 
-    public function getProfile(): User
+    public function getProfile(): {{name}}
     {
         return Auth::guard('{{guard_name}}')->user();
     }
