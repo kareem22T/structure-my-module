@@ -31,7 +31,7 @@ class MakeAuthMvc extends Command
             [
                 'name' => 'Add Model',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/model.stub',
-                'target' => app_path("App/Models/{$name}.php"),
+                'target' => app_path("/Models/{$name}.php"),
             ],
             [
                 'name' => 'Add Migration',
