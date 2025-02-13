@@ -5,6 +5,7 @@ namespace Kareem22t\StructureMyModule;
 use Illuminate\Support\ServiceProvider;
 use Kareem22t\StructureMyModule\Commands\CreateModule;
 use Kareem22t\StructureMyModule\Commands\MakeAuthMvc;
+use Illuminate\Support\Facades\Route;
 
 class StructureMyModuleServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,10 @@ class StructureMyModuleServiceProvider extends ServiceProvider
                 CreateModule::class,
                 MakeAuthMvc::class,
             ]);
+        }
+        $moduleRoutes = glob(base_path('routes/*.php'));
+        foreach ($moduleRoutes as $routeFile) {
+            Route::middleware('web')->group($routeFile);
         }
     }
 }

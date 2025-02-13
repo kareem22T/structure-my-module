@@ -1,0 +1,21 @@
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\{{name}}\Auth\AuthController;
+
+Route::prefix('{{lowercase_name}}')->name('{{lowercase_name}}.')->group(function () {
+    // Authentication Routes
+    Route::post('login', [AuthController::class, 'login']);
+    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+
+    Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
+    Route::post('register', [AuthController::class, 'register']);
+
+    // Protected Routes (Requires Authentication)
+    Route::middleware('auth:{{lowercase_name}}')->group(function () {
+        Route::get('profile', [AuthController::class, 'showProfileForm'])->name('profile');
+
+        Route::get('profile/edit', [AuthController::class, 'showUpdateProfileForm'])->name('edit-profile');
+        Route::put('profile/update', [AuthController::class, 'updateProfile'])->name('update-profile');
+
+        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    });
+});

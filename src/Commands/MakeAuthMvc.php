@@ -39,6 +39,11 @@ class MakeAuthMvc extends Command
                 'target' => database_path("migrations/" . now()->format('Y_m_d_His') . "_create_{$plural_name}_table.php"),
             ],
             [
+                'name' => 'Routes File',
+                'stub' => __DIR__ . '/../stubs/auth-mvc/routes.stub',
+                'target' => base_path("routes/{$lowercase_name}.php"),
+            ],
+            [
                 'name' => 'Repository Interface',
                 'stub' => __DIR__ . '/../stubs/auth-mvc/interface.stub',
                 'target' => app_path("Repositories/Web/{$name}/Auth/AuthRepositoryInterface.php"),
