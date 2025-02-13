@@ -16,7 +16,7 @@ class AuthRepository implements AuthRepositoryInterface
         ]);
     }
 
-    public function updateUser(User $user, array $data): bool
+    public function updateUser({{name}} $user, array $data): bool
     {
         return $user->update($data);
     }
